@@ -66,14 +66,15 @@ const userDelete = async(req, res = response) => {
 
   const user = await User.findByIdAndUpdate(id, { state: false });
 
+  const userAuth = req.user;
+
   if(user !== null){
     await user.save();
   }
 
   res.status(200).json({
-    msg: "delete API - controller",
-    id,
-    user
+    user,
+    userAuth
   });
 };
 
